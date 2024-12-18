@@ -2,8 +2,8 @@ The code is licensed under LGPL-2.1-or-later: https://spdx.org/licenses/LGPL-2.1
 
 The art is licensed under CC-BY-SA-4.0: https://spdx.org/licenses/CC-BY-SA-4.0.html
 
-The original version of the rune art is from 'CC0 Rune Icons' by AntumDeluge, licensed CC0
-https://opengameart.org/content/cc0-rune-icons
+The original version of the rune art is from 'RPG Coins Set' by qubodup, licensed CC-BY-SA 3.0
+https://opengameart.org/content/rpg-coins-set
 
 The original version of the sound effect is from 'Teleport Spell' by Ogrebane, licensed CC0
 https://opengameart.org/content/teleport-spell

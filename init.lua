@@ -1,39 +1,42 @@
--- miner_runes
+-- miner_charms
+
 
 -- Load support for MT game translation.
-local S = minetest.get_translator(minetest.get_current_modname())
+local S = core.get_translator(core.get_current_modname())
+
 
 -- Define the effects
-local old_handle_node_drops = minetest.handle_node_drops
+local old_handle_node_drops = core.handle_node_drops
 
-minetest.handle_node_drops = function(pos, drops, digger)
+
+core.handle_node_drops = function(pos, drops, digger)
 	-- Check drops
 	for k, name in pairs(drops) do
 		-- Is it stone?
-		if minetest.get_item_group(name, "stone") > 0 then
-			-- Is the player holding the Repel Stone rune?
+		if core.get_item_group(name, "stone") > 0 then
+			-- Is the player holding the Repel Stone charm?
 			local inv = digger:get_inventory()
 			
-			if inv:contains_item("main", "miner_runes:repel_stone") then
+			if inv:contains_item("main", "miner_charms:repel_stone") then
 				local playername = digger:get_player_name()
 				
 				-- Don't pick up the node!
 				drops[k] = nil
-				local handle = minetest.sound_play({name = "miner_runes_vaporize2"},{to_player = playername})
+				local handle = core.sound_play({name = "miner_charms_vaporize"},{to_player = playername})
 			end
 		end
 		
 		-- Is it crumbly?
-		if minetest.get_item_group(name, "crumbly") > 0 then
-			-- Is the player holding the Repel Crumbly rune?
+		if core.get_item_group(name, "crumbly") > 0 then
+			-- Is the player holding the Crumbly Repel charm?
 			local inv = digger:get_inventory()
 			
-			if inv:contains_item("main", "miner_runes:repel_crumbly") then
+			if inv:contains_item("main", "miner_charms:repel_crumbly") then
 				local playername = digger:get_player_name()
 				
 				-- Don't pick up the node!
 				drops[k] = nil
-				local handle = minetest.sound_play({name = "miner_runes_vaporize2"},{to_player = playername})
+				local handle = core.sound_play({name = "miner_charms_vaporize"},{to_player = playername})
 			end
 		end
 	end
@@ -42,35 +45,46 @@ minetest.handle_node_drops = function(pos, drops, digger)
 end
 
 
--- Define the objects
--- Repel Stone rune
-minetest.register_craftitem("miner_runes:repel_stone", {
-    description = "Stone repelling rune",
-    inventory_image = "miner_runes_jeran_16.png"
+-- Define the charms
+-- Repel Stone
+core.register_craftitem("miner_charms:repel_stone", {
+    description = "A charm that repels stone.",
+	short_description = "Stone Repel Charm",
+    inventory_image = "coin_1_16.png",
+	wield_scale = {x = 0.5, y = 0.5, z = 0.5},
+	stack_max = 1,
+	light_source = 1
 })
 
-minetest.register_craft({
+
+core.register_craft({
     type = "shaped",
-    output = "miner_runes:repel_stone",
+    output = "miner_charms:repel_stone",
     recipe = {
-        {"group:stone", "", "group:stone"},
-        {"", "group:soil", ""},
-        {"group:stone", "", "group:stone"}
+        {"group:stone", "default:gold_ingot", "group:stone"},
+        {"default:gold_ingot", "default:diamond", "default:gold_ingot"},
+        {"group:stone", "default:gold_ingot", "group:stone"}
     }
 })
 
--- Repel Dirt, Sand, and Gravel Rune
-minetest.register_craftitem("miner_runes:repel_crumbly", {
-    description = "Dirt, sand, and gravel repelling rune",
-    inventory_image = "miner_runes_haglaz_16.png"
+
+-- Repel Dirt, Gravel. and Sand
+core.register_craftitem("miner_charms:repel_crumbly", {
+    description = "A charm that repels dirt, gravel, and sand.",
+	short_description = "Crumbly Repel Charm",
+    inventory_image = "coin_2_16.png",
+	wield_scale = {x = 0.5, y = 0.5, z = 0.5},
+	stack_max = 1,
+	light_source = 1
 })
 
-minetest.register_craft({
+
+core.register_craft({
     type = "shaped",
-    output = "miner_runes:repel_crumbly",
+    output = "miner_charms:repel_crumbly",
     recipe = {
-        {"group:crumbly", "", "group:crumbly"},
-        {"", "group:stone", ""},
-        {"group:crumbly", "", "group:crumbly"}
+        {"group:crumbly", "default:gold_ingot", "group:crumbly"},
+        {"default:gold_ingot", "default:diamond", "default:gold_ingot"},
+        {"group:crumbly", "default:gold_ingot", "group:crumbly"}
     }
 })
